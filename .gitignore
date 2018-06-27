@@ -1,0 +1,27 @@
+/target/
+/logs/
+
+#Compiled class file
+*.class
+
+#Log files
+*.log
+
+#Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+#Intellij
+.idea/
+*.iml
+.iws
+
+
+/temp
+/.settings/
+/.project
+/.classpath
