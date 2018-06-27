@@ -1,2 +1,7 @@
-# bifrost-login
-Application responsable for obtaining an access token in order to access other Bifrost APIs
+
+#BIFROST LOGIN
+*************************************
+General login for all Bifrost APIs
+
+Obtains a Bearer access token to be sent in API calls as authentication to access the endpoint
+
