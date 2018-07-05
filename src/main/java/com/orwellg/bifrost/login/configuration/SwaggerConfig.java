@@ -19,7 +19,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
           .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.orwellg.bifrost.party.controller"))
+          .apis(RequestHandlerSelectors.basePackage("com.orwellg.bifrost.login.controller"))
           .paths(PathSelectors.any())
           .build()
           .apiInfo(apiInfo());                                       
@@ -28,7 +28,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo(
           "Bifrost Login API",
-          "Midtier api for Party.", 
+          "Midtier api for Login to APIs.",
           "API TOS", 
           "Terms of service", 
           new Contact("ContactName", "www.example.com", "myeaddress@orwellg.com"),
