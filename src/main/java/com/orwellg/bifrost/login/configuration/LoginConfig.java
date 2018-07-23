@@ -1,17 +1,29 @@
 package com.orwellg.bifrost.login.configuration;
 
 import com.google.gson.Gson;
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.client.RestTemplate;
+
+import javax.net.ssl.SSLContext;
+import java.io.InputStream;
+import java.security.KeyStore;
 
 @Configuration
 @EnableWebSecurity
@@ -87,4 +99,27 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
             httpSecurity.headers().cacheControl();
         }
+
+
+//    @Bean
+//    RestTemplate restTemplate() throws Exception {
+//        //FIXME: hide cert pwd
+//        char[] password = "Tempo.99".toCharArray();
+//
+//        SSLContext sslContext = SSLContextBuilder.create()
+//                .loadKeyMaterial(keyStore("bifrost-truststore.jks", password), password)
+//                .loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
+//        HttpClient client = HttpClients.custom().setSSLContext(sslContext).build();
+//        RestTemplate rt = new RestTemplate(new HttpComponentsClientHttpRequestFactory(client));
+//        return rt;
+//
+//    }
+
+    public static KeyStore keyStore(String file, char[] password) throws Exception {
+        KeyStore keyStore = KeyStore.getInstance("JKS");
+        try (InputStream in = new ClassPathResource(file).getInputStream()) {
+            keyStore.load(in, password);
+        }
+        return keyStore;
+    }
     }
