@@ -19,9 +19,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.SSLContext;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
 
@@ -30,11 +33,6 @@ import java.security.KeyStore;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class LoginConfig extends WebSecurityConfigurerAdapter {
 
-  /*  @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-    }
-*/
 
         @Autowired
         private Environment environment;
@@ -101,23 +99,12 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
         }
 
 
-//    @Bean
-//    RestTemplate restTemplate() throws Exception {
-//        //FIXME: hide cert pwd
-//        char[] password = "Tempo.99".toCharArray();
-//
-//        SSLContext sslContext = SSLContextBuilder.create()
-//                .loadKeyMaterial(keyStore("bifrost-truststore.jks", password), password)
-//                .loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
-//        HttpClient client = HttpClients.custom().setSSLContext(sslContext).build();
-//        RestTemplate rt = new RestTemplate(new HttpComponentsClientHttpRequestFactory(client));
-//        return rt;
-//
-//    }
+
 
     public static KeyStore keyStore(String file, char[] password) throws Exception {
         KeyStore keyStore = KeyStore.getInstance("JKS");
-        try (InputStream in = new ClassPathResource(file).getInputStream()) {
+        File key = ResourceUtils.getFile(file);
+        try (InputStream in = new FileInputStream(key)) {
             keyStore.load(in, password);
         }
         return keyStore;

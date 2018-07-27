@@ -36,6 +36,12 @@ public class OauthServiceImpl implements OauthService{
     @Value("${authServer}")
     private String authServer;
 
+    @Value("${truststore.path}")
+    private String truststore;
+
+    @Value("${truststore.pass}")
+    private String trustPass;
+
     /**
      * Composes the headeres required for the token endpoint
      *
@@ -73,12 +79,12 @@ public class OauthServiceImpl implements OauthService{
 
 
     private HttpComponentsClientHttpRequestFactory getRequestFactory(){
-        char[] password = "Tempo.99".toCharArray();
+        char[] password = trustPass.toCharArray();
 
         SSLContext sslContext = null;
         try {
             sslContext = SSLContextBuilder.create()
-                    .loadKeyMaterial(keyStore("bifrost-truststore.jks", password), password)
+                    .loadKeyMaterial(keyStore(truststore, password), password)
                     .loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
         } catch (Exception e) {
             e.printStackTrace();
