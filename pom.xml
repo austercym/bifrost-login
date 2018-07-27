@@ -6,7 +6,11 @@
 
     <groupId>com.orwellg</groupId>
     <artifactId>bifrost-login</artifactId>
-    <version>0.0.3</version>
+
+    
+
+    <version>0.0.4</version>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>
