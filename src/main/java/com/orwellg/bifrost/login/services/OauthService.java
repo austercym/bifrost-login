@@ -6,6 +6,4 @@ public interface OauthService {
 
     OAuth2AccessToken getTokenWithClientCredentialsGrant(final String user, final String credentials);
 
-
-
 }

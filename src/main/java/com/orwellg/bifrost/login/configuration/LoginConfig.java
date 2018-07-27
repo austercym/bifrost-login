@@ -1,28 +1,38 @@
 package com.orwellg.bifrost.login.configuration;
 
 import com.google.gson.Gson;
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.client.RestTemplate;
+
+import javax.net.ssl.SSLContext;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.security.KeyStore;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class LoginConfig extends WebSecurityConfigurerAdapter {
 
-  /*  @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-    }
-*/
 
         @Autowired
         private Environment environment;
@@ -87,4 +97,16 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
             httpSecurity.headers().cacheControl();
         }
+
+
+
+
+    public static KeyStore keyStore(String file, char[] password) throws Exception {
+        KeyStore keyStore = KeyStore.getInstance("JKS");
+        File key = ResourceUtils.getFile(file);
+        try (InputStream in = new FileInputStream(key)) {
+            keyStore.load(in, password);
+        }
+        return keyStore;
+    }
     }
