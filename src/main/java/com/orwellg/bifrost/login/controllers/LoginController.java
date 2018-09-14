@@ -35,12 +35,23 @@ public class LoginController {
 
         log.info("Login attempt for user: {}", usr.getUsr());
 
-        final OAuth2AccessToken token = oAuthService.getTokenWithClientCredentialsGrant(usr.getUsr(), usr.getPwd());
-        log.info("token requested for user: {}, received: {}", usr.getUsr(), token != null);
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
+        ResponseEntity<Object> authResponse = null;
+        try {
+            final OAuth2AccessToken token = oAuthService.getTokenWithClientCredentialsGrant(usr.getUsr(), usr.getPwd());
+            log.info("token requested for user: {}, received: {}", usr.getUsr(), token != null);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
 
-        ResponseEntity<Object> authResponse = new ResponseEntity<>(token, headers, HttpStatus.OK);
+            authResponse = new ResponseEntity<>(token, headers, HttpStatus.OK);
+        }catch (Exception e){
+            log.error(e.getCause().getMessage());
+            if(e.getMessage().equalsIgnoreCase("Access token denied."))
+            authResponse= new ResponseEntity<>(e.getCause().getMessage(), HttpStatus.UNAUTHORIZED);
+                else{
+                    throw e;
+            }
+        }
+
         return authResponse;
     }
 
