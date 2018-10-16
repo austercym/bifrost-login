@@ -59,6 +59,7 @@ public class OauthServiceImpl implements OauthService{
         ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
         details.setClientSecret(credentials);
         details.setClientId(user);
+        //TODO: details.setScope(xxxxx); when we apply scoped access to bifrost/api
         details.setAccessTokenUri(authServer + TOKEN_ENDPOINT);
 
 
