@@ -22,17 +22,17 @@ public class LoginApplication {
 		
 		Map<String, Object> defaultPropertyValues = new HashMap<String, Object>();
 		defaultPropertyValues.put("swagger", "true");
-		defaultPropertyValues.put("server.ssl.key-store-type", "PKCS12");
-		defaultPropertyValues.put("server.ssl.key-store", "/etc/ssl/keystore.p12");
+		defaultPropertyValues.put("server.ssl.key-store-type", ".");
+		defaultPropertyValues.put("server.ssl.key-store", "-");
 		defaultPropertyValues.put("server.ssl.key-store-password", "XXXXXXX");
 		defaultPropertyValues.put("server.ssl.key-alias", "cert");
-		defaultPropertyValues.put("truststore.path", "/etc/ssl/truststore.jks");
+		defaultPropertyValues.put("truststore.path", "-");
 		defaultPropertyValues.put("truststore.pass", "XXXXXXX");
 		defaultPropertyValues.put("oauthprop.clientId", "bifrost");
 		defaultPropertyValues.put("oauthprop.clientSecret", "XXXXXXX");
-		defaultPropertyValues.put("oauthprop.checkTokenUrl", "https://sid-ping-master-0.node.sid.consul:9031/as/introspect.oauth2");
-		defaultPropertyValues.put("oauthprop.userInfoUrl", "https://sid-ping-master-0.node.sid.consul:9031/idp/userinfo.openid");
-		defaultPropertyValues.put("authServer", "https://sid-ping-master-0.node.sid.consul:9031");
+		defaultPropertyValues.put("oauthprop.checkTokenUrl", "-");
+		defaultPropertyValues.put("oauthprop.userInfoUrl", "-");
+		defaultPropertyValues.put("authServer", "-");
 		
 		List<String> zookeeperPaths = Arrays.asList("/com/orwellg/bifrost", "/com/orwellg/yggdrasil/id-generator", "/com/orwellg/yggdrasil/kafka", "/com/orwellg/yggdrasil/network");
 		
