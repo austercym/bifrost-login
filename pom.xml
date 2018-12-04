@@ -97,6 +97,11 @@
 		    <artifactId>umbrella-spring</artifactId>
 		    <version>${umbrella.spring.version}</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
         
     </dependencies>
     <build>
