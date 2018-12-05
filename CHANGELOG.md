@@ -7,4 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 N/A
 
+## [0.2.0] - 2018-12-05
+
+### Added
+Actuator
+
+### Changed
+N/A
+
+### Removed
+N/A
+
+
 ## [0.1.0] - 2018-10-16
