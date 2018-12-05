@@ -72,6 +72,7 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
                         ).permitAll()
                         .antMatchers("/bifrost/login/**").permitAll()
                         .antMatchers("/swagger-resources/**").permitAll()
+						.antMatchers("/actuator/health/**").permitAll()
                         .antMatchers("/v2/**").permitAll()
                         .anyRequest().authenticated();
 
@@ -91,6 +92,7 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
                         ).permitAll()
                         .antMatchers("/bifrost/login/**").permitAll()
                         .antMatchers("/swagger-resources/**").denyAll()
+						.antMatchers("/actuator/health/**").permitAll()
                         .antMatchers("/v2/**").denyAll()
                         .anyRequest().authenticated();
             }
